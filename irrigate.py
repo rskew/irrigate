@@ -9,7 +9,7 @@ solenoid_2_pin = 3
 
 GPIO.setup(solenoid_1_pin, GPIO.OUT)
 GPIO.setup(solenoid_2_pin, GPIO.OUT)
-# pins are active low (I think??) so set them high
+# pins are active low so initialise high
 GPIO.output(solenoid_1_pin, True)
 GPIO.output(solenoid_2_pin, True)
 
@@ -24,8 +24,8 @@ def irrigation_stop():
 
 #schedule.every().day.at("6.00").do(irrigation_start)
 #schedule.every().day.at("6.05").do(irrigation_stop)
-schedule.every(2).seconds.at().do(irrigation_start)
-schedule.every(5).seconds.at().do(irrigation_stop)
+schedule.every(5).seconds.do(irrigation_start)
+schedule.every(2).seconds.do(irrigation_stop)
 
 
 while True:
