@@ -1,3 +1,6 @@
+# Daemon that turns the irrigation on and off at specified times.
+#  run like this:
+#  sudo python2 schedule_irrigation.py >> irrigation_log.txt 2>&1 &
 import RPi.GPIO as GPIO
 import time
 import schedule
@@ -22,8 +25,10 @@ def irrigation_stop():
     GPIO.output(solenoid_1_pin, True)
 
 
-schedule.every().day.at("18:40").do(irrigation_start)
-schedule.every().day.at("18:41").do(irrigation_stop)
+# Must use GMT, 18.44 -> 7.44 so back 11 hours at daylight savings time
+#  Want to water at 5am -> 5.15am (daylight savings), so gmt is 18->18.15
+schedule.every().day.at("18:00").do(irrigation_start)
+schedule.every().day.at("18:15").do(irrigation_stop)
 
 
 while True:
