@@ -22,8 +22,8 @@ def irrigation_stop():
     GPIO.output(solenoid_1_pin, True)
 
 
-schedule.every().day.at("18.40").do(irrigation_start)
-schedule.every().day.at("18.41").do(irrigation_stop)
+schedule.every().day.at("18:40").do(irrigation_start)
+schedule.every().day.at("18:41").do(irrigation_stop)
 
 
 while True:
